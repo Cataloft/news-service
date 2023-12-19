@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  news_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "24680:24680"
+      - "24681:8080"
+    depends_on:
+      - db
+    networks:
+      - postgres
+
+  db:
+    image: postgres:alpine3.19
+    environment:
+      POSTGRES_DB: news_db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./internal/repository/schema:/docker-entrypoint-initdb.d
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge

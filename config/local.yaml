@@ -1,0 +1,4 @@
+env: "local"
+postgres_url: "postgres://root:secret@db:5432/news_db"
+server:
+  address: "0.0.0.0:24680"
