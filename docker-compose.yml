@@ -7,7 +7,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "24680:24680"
-      - "24681:8080"
     depends_on:
       - db
     networks:

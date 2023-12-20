@@ -1,6 +1,7 @@
 package list
 
 import (
+	"log"
 	"news/internal/model/news"
 	"news/internal/model/newscategories"
 	"news/internal/repository/postgres"
@@ -28,6 +29,7 @@ func GetListNews(db *postgres.Postgres) fiber.Handler {
 
 		newsRows, err := db.DB.SelectAllFrom(news.NewsTable, "")
 		if err != nil {
+			log.Println(err)
 			return err
 		}
 
@@ -47,6 +49,7 @@ func GetListNews(db *postgres.Postgres) fiber.Handler {
 		resp.News = ListNews
 		err = ctx.JSON(resp)
 		if err != nil {
+			log.Println(err)
 			return err
 		}
 
